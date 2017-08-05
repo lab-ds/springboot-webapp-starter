@@ -3,6 +3,10 @@ package br.edu.ifrs.canoas.lds.webapp.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.util.Set;
 
 /**
@@ -15,12 +19,20 @@ public class User {
 	@GeneratedValue
 	private Long id;
 	private String username;
-	private String firstName;
-	private String lastName;
-	private String password;
 	private boolean active;
+	private String password;
 	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<Role> roles;
+	
+	@NotEmpty
+	private String name;
+	@Email @NotEmpty
+	private String email;
+	@NotEmpty
+	private String experience;
+	@NotEmpty
+	private String skill;
+	
     @OneToOne @JsonIgnore
     private File picture;
 
@@ -76,23 +88,38 @@ public class User {
         this.picture = picture;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getLastName() {
-        return lastName;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public String getFullName(){
-	    return firstName + " " + lastName;
-    }
+	public String getExperience() {
+		return experience;
+	}
+
+	public void setExperience(String experience) {
+		this.experience = experience;
+	}
+
+	public String getSkill() {
+		return skill;
+	}
+
+	public void setSkill(String skill) {
+		this.skill = skill;
+	}
+
+    
+
 }

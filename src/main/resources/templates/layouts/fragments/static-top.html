@@ -16,7 +16,7 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img class="user-image" th:src="${#authentication.principal.user.picture?.pictureBase64}" alt="User Image" />
-                        <span class="hidden-xs" th:text="${#authentication.principal.user.fullName}"/>
+                        <span class="hidden-xs" th:text="${#authentication.principal.user.name}"/>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
@@ -25,14 +25,14 @@
                                  th:src="${#authentication.principal.user.picture?.pictureBase64}">
 
                             <p>
-                                <span class="hidden-xs" th:text="${#authentication.principal.user.fullName}"/>
+                                <span class="hidden-xs" th:text="${#authentication.principal.user.name}"/>
                                 <small>Some description here...</small>
                             </p>
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="#" class="btn btn-default btn-flat"  th:href="@{/user/profile}">Profile</a>
                             </div>
                             <div class="pull-right">
                                 <a href="#" th:href="@{/login?logout}" class="btn btn-default btn-flat">Sign out</a>
