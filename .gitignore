@@ -96,15 +96,6 @@ local.properties
 # PDT-specific (PHP Development Tools)
 .buildpath
 
-# sbteclipse plugin
-.target
-css
-form.html
-img
-js
-list.html
-# Tern plugin
-.tern-project
 
 # TeXlipse plugin
 .texlipse
