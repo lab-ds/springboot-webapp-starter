@@ -39,27 +39,7 @@ public abstract class MyFluentTest extends FluentTest {
         loginPage.go(port);
         loginPage.fillAndSubmitForm("user", "user")
                 .awaitUntilFormDisappear();
-        assertThat(window().title()).isEqualTo("Header");
+        assertThat(window().title()).isEqualTo("IFRS");
     }
 
-    public void loginProfessor() {
-        loginPage.go(port);
-        loginPage.fillAndSubmitForm("orientador", "user")
-                .awaitUntilFormDisappear();
-        assertThat(window().title()).isEqualTo("Header");
-    }
-
-    public void loginUserWithoutSubmittedTheme() {
-    	loginPage.go(port);
-    	loginPage.fillAndSubmitForm("userWithoutSubmission", "user");
-    	await().atMost(1, TimeUnit.SECONDS);
-    	assertThat(window().title()).isEqualTo("Header");
-    }
-
-	public void loginUserInEvaluationAfterExpirationTime() {
-		loginPage.go(port);
-		loginPage.fillAndSubmitForm("userExpiredEvaluation", "user");
-		await().atMost(1, TimeUnit.SECONDS);
-		assertThat(window().title()).isEqualTo("Header");
-	}
 }

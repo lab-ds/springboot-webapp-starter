@@ -22,7 +22,7 @@ public class LoginTest extends MyFluentTest {
         loginPage.fillAndSubmitForm("user", "user")
                 .awaitUntilFormDisappear();
         //Then
-        assertThat(window().title()).isEqualTo("Header");
+        assertThat(window().title()).isEqualTo("IFRS");
     }
 
     @Test

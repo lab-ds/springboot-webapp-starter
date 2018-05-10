@@ -14,28 +14,32 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import br.edu.ifrs.canoas.lds.webapp.config.auth.UserImpl;
 import br.edu.ifrs.canoas.lds.webapp.domain.User;
-import br.edu.ifrs.canoas.lds.webapp.repository.UserRepository;
+import lombok.Data;
 
 @RunWith(SpringRunner.class)
 public abstract class BaseControllerTest {
 
     protected static final Long   USER_ID= 101L;
     protected static final String USER_NAME= "User Principal";
+    protected static final String USER_EMAIL= "rodrigo.noll@canoas.ifrs.edu.br";
     protected static final String FIELD_SAVED = "Salvo com sucesso";
 
     @Autowired
     MockMvc mvc;
-    @Autowired
-    UserRepository userRepository;
 
-    UserImpl userDetails;
-    User user;
+    protected UserImpl userDetails;
+    protected User user;
+
 
     @Before
     public void setup() {
+    	user = new User();
+    	user.setId(USER_ID);
+    	user.setEmail(USER_EMAIL);
+    	user.setName(USER_NAME);
         userDetails = new UserImpl("user", "user",
         		AuthorityUtils.createAuthorityList("ROLE_USER"),
-        		userRepository.getOne(100L));
+        		user);
 
         Authentication authentication = Mockito.mock(Authentication.class);
         SecurityContext securityContext = Mockito.mock(SecurityContext.class);
@@ -43,6 +47,5 @@ public abstract class BaseControllerTest {
         Mockito.when(securityContext.getAuthentication().getPrincipal()).thenReturn(userDetails);
         SecurityContextHolder.setContext(securityContext);
     }
-
 
 }

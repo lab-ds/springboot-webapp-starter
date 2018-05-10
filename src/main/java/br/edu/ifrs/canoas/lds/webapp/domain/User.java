@@ -41,5 +41,5 @@ public class User {
 	private String skill;
     @OneToOne
     private File picture;
-    
+
 }

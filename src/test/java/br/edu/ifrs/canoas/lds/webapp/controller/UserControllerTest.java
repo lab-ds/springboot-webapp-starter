@@ -21,6 +21,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 
 import br.edu.ifrs.canoas.lds.webapp.config.Messages;
+import br.edu.ifrs.canoas.lds.webapp.config.auth.UserImpl;
 import br.edu.ifrs.canoas.lds.webapp.service.UserService;
 
 @WebMvcTest(UserController.class)
@@ -31,27 +32,30 @@ public class UserControllerTest extends BaseControllerTest{
     Messages messages;
     @MockBean
     UserService userService;
+    @MockBean
+    UserImpl userImpl;
 
     @Test
     public void view_user_profile() throws Exception{
+    	given(userService.getOne(super.user)).willReturn(super.user);
         this.mvc.perform(get("/user/profile")
                 .with(user(userDetails))
                 .accept(MediaType.TEXT_HTML)
         )
-//                .andExpect(status().isOk())
-//                .andExpect(content().contentType("text/html;charset=UTF-8"))
-//                .andExpect(view().name("/user/profile"))
-//                .andExpect(model().attribute("user"
-//                        ,allOf(
-//                                hasProperty("id", is(USER_ID))
-//                                ,hasProperty("name", is(USER_NAME)))
-//                ))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("text/html;charset=UTF-8"))
+                .andExpect(view().name("/user/profile"))
+                .andExpect(model().attribute("user"
+                        ,allOf(
+                                hasProperty("id", is(USER_ID))
+                                ,hasProperty("name", is(USER_NAME)))
+                ))
         ;
     }
 
     @Test
-    @Ignore
     public void save_user_profile() throws Exception{
+    	given(userService.getOne(super.user)).willReturn(super.user);
         given(this.messages.get("field.saved")).willReturn(FIELD_SAVED);
 
         this.mvc.perform(post("/user/save")
@@ -60,6 +64,7 @@ public class UserControllerTest extends BaseControllerTest{
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("id", USER_ID.toString())
                 .param("name", USER_NAME)
+                .param("email", USER_EMAIL)
         )
                 .andExpect(view().name("redirect:/user/profile"))
                 .andExpect(model().size(1))
