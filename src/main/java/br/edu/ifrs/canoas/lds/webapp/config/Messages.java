@@ -1,12 +1,14 @@
 package br.edu.ifrs.canoas.lds.webapp.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Locale;
+
+import javax.annotation.PostConstruct;
+
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
-import java.util.Locale;
+import lombok.AllArgsConstructor;
 
 /**
  * Created by rodrigo on 3/16/17.
@@ -14,10 +16,12 @@ import java.util.Locale;
 @Component
 public class Messages {
 
-	@Autowired
-	private MessageSource messageSource;
-
 	private MessageSourceAccessor accessor;
+	private final MessageSource messageSource;
+
+	public Messages(MessageSource messageSource) {
+		this.messageSource = messageSource;
+	}
 
 	@PostConstruct
 	private void init() {

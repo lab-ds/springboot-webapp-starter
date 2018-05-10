@@ -5,24 +5,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 @Configuration
-public class MVCConfig extends WebMvcConfigurerAdapter {
+public class MVCConfig implements WebMvcConfigurer {
 
-	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
-		super.addViewControllers(registry);
-		registry.addViewController("/login").setViewName("/auth/login");
-		registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
-	}
+    public void addViewControllers(ViewControllerRegistry registry) {
+    	registry.addViewController("/login").setViewName("/auth/login");
+        registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
+    }
 
-	/**
-	 * Locale change interceptor.
-	 *
-	 * @return the locale change interceptor
-	 */
 	@Bean
 	public LocaleChangeInterceptor localeChangeInterceptor() {
 		LocaleChangeInterceptor lci = new LocaleChangeInterceptor();

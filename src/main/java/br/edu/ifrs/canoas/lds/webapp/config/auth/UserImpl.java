@@ -2,6 +2,8 @@ package br.edu.ifrs.canoas.lds.webapp.config.auth;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import lombok.Getter;
+
 import java.util.Collection;
 
 /**
@@ -9,7 +11,9 @@ import java.util.Collection;
  */
 public class UserImpl extends org.springframework.security.core.userdetails.User{
 
-    private br.edu.ifrs.canoas.lds.webapp.domain.User user;
+	private static final long serialVersionUID = 1308839480601748734L;
+
+	private br.edu.ifrs.canoas.lds.webapp.domain.User user;
 
     public UserImpl(String username, String password, Collection<? extends GrantedAuthority> authorities, br.edu.ifrs.canoas.lds.webapp.domain.User user) {
         super(username, password, authorities);
@@ -25,6 +29,7 @@ public class UserImpl extends org.springframework.security.core.userdetails.User
     }
 
     public br.edu.ifrs.canoas.lds.webapp.domain.User getUser() {
-        return user;
-    }
+		return user;
+	}
+
 }

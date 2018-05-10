@@ -1,42 +1,25 @@
 package br.edu.ifrs.canoas.lds.webapp.domain;
 
-import javax.persistence.*;
 import java.util.Set;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Created by rodrigo on 3/18/17.
  */
 @Entity
+@Data
+@NoArgsConstructor
 public class Role {
 
-	@Id
-	@GeneratedValue
+	@Id @GeneratedValue
 	private Long id;
 	private String role;
-	@ManyToMany
-	private Set<User> accounts;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
-	public Set<User> getAccounts() {
-		return accounts;
-	}
-
-	public void setAccounts(Set<User> accounts) {
-		this.accounts = accounts;
-	}
 }
